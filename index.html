@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WiB - Wise in Blue | Gestione Finanziaria</title>
+    <style>
+        :root {
+          /* Primitive Color Tokens */
+          --color-white: rgba(255, 255, 255, 1);
+          --color-black: rgba(0, 0, 0, 1);
+          --color-cream-50: rgba(252, 252, 249, 1);
+          --color-cream-100: rgba(255, 255, 253, 1);
+          --color-gray-200: rgba(245, 245, 245, 1);
+          --color-gray-300: rgba(167, 169, 169, 1);
+          --color-gray-400: rgba(119, 124, 124, 1);
+          --color-slate-500: rgba(98, 108, 113, 1);
+          --color-brown-600: rgba(94, 82, 64, 1);
+          --color-charcoal-700: rgba(31, 33, 33, 1);
+          --color-charcoal-800: rgba(38, 40, 40, 1);
+          --color-slate-900: rgba(19, 52, 59, 1);
+          --color-teal-300: rgba(50, 184, 198, 1);
+          --color-teal-400: rgba(45, 166, 178, 1);
+          --color-teal-500: rgba(33, 128, 141, 1);
+          --color-teal-600: rgba(29, 116, 128, 1);
+          --color-teal-700: rgba(26, 104, 115, 1);
+          --color-teal-800: rgba(41, 150, 161, 1);
+          --color-red-400: rgba(255, 84, 89, 1);
+          --color-red-500: rgba(192, 21, 47, 1);
+          --color-orange-400: rgba(230, 129, 97, 1);
+          --color-orange-500: rgba(168, 75, 47, 1);
+        
+          /* RGB versions for opacity control */
+          --color-brown-600-rgb: 94, 82, 64;
+          --color-teal-500-rgb: 33, 128, 141;
+          --color-slate-900-rgb: 19, 52, 59;
+          --color-slate-500-rgb: 98, 108, 113;
+          --color-red-500-rgb: 192, 21, 47;
+          --color-red-400-rgb: 255, 84, 89;
+          --color-orange-500-rgb: 168, 75, 47;
+          --color-orange-400-rgb: 230, 129, 97;
+        
+          /* Background color tokens (Light Mode) */
+          --color-bg-1: rgba(59, 130, 246, 0.08);
+          --color-bg-2: rgba(245, 158, 11, 0.08);
+          --color-bg-3: rgba(34, 197, 94, 0.08);
+          --color-bg-4: rgba(239, 68, 68, 0.08);
+          --color-bg-5: rgba(147, 51, 234, 0.08);
+          --color-bg-6: rgba(249, 115, 22, 0.08);
+          --color-bg-7: rgba(236, 72, 153, 0.08);
+          --color-bg-8: rgba(6, 182, 212, 0.08);
+        
+          /* Semantic Color Tokens (Light Mode) */
+          --color-background: var(--color-cream-50);
+          --color-surface: var(--color-cream-100);
+          --color-text: var(--color-slate-900);
+          --color-text-secondary: var(--color-slate-500);
+          --color-primary: var(--color-teal-500);
+          --color-primary-hover: var(--color-teal-600);
+          --color-primary-active: var(--color-teal-700);
+          --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+          --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+          --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+          --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+          --color-btn-primary-text: var(--color-cream-50);
+          --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+          --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+          --color-error: var(--color-red-500);
+          --color-success: var(--color-teal-500);
+          --color-warning: var(--color-orange-500);
+          --color-info: var(--color-slate-500);
+          --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+          --color-select-caret: rgba(var(--color-slate-900-rgb), 0.8);
+        
+          /* Common style patterns */
+          --focus-ring: 0 0 0 3px var(--color-focus-ring);
+          --focus-outline: 2px solid var(--color-primary);
+          --status-bg-opacity: 0.15;
+          --status-border-opacity: 0.25;
+          --select-caret-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23134252' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+          --select-caret-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f5f5f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        
+          /* RGB versions for opacity control */
+          --color-success-rgb: 33, 128, 141;
+          --color-error-rgb: 192, 21, 47;
+          --color-warning-rgb: 168, 75, 47;
+          --color-info-rgb: 98, 108, 113;
+        
+          /* Typography */
+          --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system,
+            BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+          --font-family-mono: "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo,
+            Monaco, Consolas, monospace;
+          --font-size-xs: 11px;
+          --font-size-sm: 12px;
+          --font-size-base: 14px;
+          --font-size-md: 14px;
+          --font-size-lg: 16px;
+          --font-size-xl: 18px;
+          --font-size-2xl: 20px;
+          --font-size-3xl: 24px;
+          --font-size-4xl: 30px;
+          --font-weight-normal: 400;
+          --font-weight-medium: 500;
+          --font-weight-semibold: 550;
+          --font-weight-bold: 600;
+          --line-height-tight: 1.2;
+          --line-height-normal: 1.5;
+          --letter-spacing-tight: -0.01em;
+        
+          /* Spacing */
+          --space-0: 0;
+          --space-1: 1px;
+          --space-2: 2px;
+          --space-4: 4px;
+          --space-6: 6px;
+          --space-8: 8px;
+          --space-10: 10px;
+          --space-12: 12px;
+          --space-16: 16px;
+          --space-20: 20px;
+          --space-24: 24px;
+          --space-32: 32px;
+        
+          /* Border Radius */
+          --radius-sm: 6px;
+          --radius-base: 8px;
+          --radius-md: 10px;
+          --radius-lg: 12px;
+          --radius-full: 9999px;
+        
+          /* Shadows */
+          --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);
+          --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+          --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04),
+            0 2px 4px -1px rgba(0, 0, 0, 0.02);
+          --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04),
+            0 4px 6px -2px rgba(0, 0, 0, 0.02);
+          --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.15),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+        
+          /* Animation */
+          --duration-fast: 150ms;
+          --duration-normal: 250ms;
+          --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+        
+          /* Layout */
+          --container-sm: 640px;
+          --container-md: 768px;
+          --container-lg: 1024px;
+          --container-xl: 1280px;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+          :root {
+            --color-gray-400-rgb: 119, 124, 124;
+            --color-teal-300-rgb: 50, 184, 198;
+            --color-gray-300-rgb: 167, 169, 169;
+            --color-gray-200-rgb: 245, 245, 245;
+        
+            --color-bg-1: rgba(29, 78, 216, 0.15);
+            --color-bg-2: rgba(180, 83, 9, 0.15);
+            --color-bg-3: rgba(21, 128, 61, 0.15);
+            --color-bg-4: rgba(185, 28, 28, 0.15);
+            --color-bg-5: rgba(107, 33, 168, 0.15);
+            --color-bg-6: rgba(194, 65, 12, 0.15);
+            --color-bg-7: rgba(190, 24, 93, 0.15);
+            --color-bg-8: rgba(8, 145, 178, 0.15);
+        
+            --color-background: var(--color-charcoal-700);
+            --color-surface: var(--color-charcoal-800);
+            --color-text: var(--color-gray-200);
+            --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+            --color-primary: var(--color-teal-300);
+            --color-primary-hover: var(--color-teal-400);
+            --color-primary-active: var(--color-teal-800);
+            --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+            --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+            --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
+            --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+            --color-error: var(--color-red-400);
+            --color-success: var(--color-teal-300);
+            --color-warning: var(--color-orange-400);
+            --color-info: var(--color-gray-300);
+            --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
+            --color-btn-primary-text: var(--color-slate-900);
+            --color-card-border: rgba(var(--color-gray-400-rgb), 0.2);
+            --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
+            --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+              inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+            --color-border-secondary: rgba(var(--color-gray-400-rgb), 0.2);
+            --color-select-caret: rgba(var(--color-gray-200-rgb), 0.8);
+        
+            --color-success-rgb: var(--color-teal-300-rgb);
+            --color-error-rgb: var(--color-red-400-rgb);
+            --color-warning-rgb: var(--color-orange-400-rgb);
+            --color-info-rgb: var(--color-gray-300-rgb);
+          }
+        }
+        
+        html {
+          font-size: var(--font-size-base);
+          font-family: var(--font-family-base);
+          line-height: var(--line-height-normal);
+          color: var(--color-text);
+          background-color: var(--color-background);
+          -webkit-font-smoothing: antialiased;
+          box-sizing: border-box;
+        }
+        
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        
+        *,
+        *::before,
+        *::after {
+          box-sizing: inherit;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+          margin: 0;
+          font-weight: var(--font-weight-semibold);
+          line-height: var(--line-height-tight);
+          color: var(--color-text);
+          letter-spacing: var(--letter-spacing-tight);
+        }
+        
+        h1 { font-size: var(--font-size-4xl); }
+        h2 { font-size: var(--font-size-3xl); }
+        h3 { font-size: var(--font-size-2xl); }
+        h4 { font-size: var(--font-size-xl); }
+        h5 { font-size: var(--font-size-lg); }
+        h6 { font-size: var(--font-size-md); }
+        
+        .btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: var(--space-8) var(--space-16);
+          border-radius: var(--radius-base);
+          font-size: var(--font-size-base);
+          font-weight: 500;
+          line-height: 1.5;
+          cursor: pointer;
+          transition: all var(--duration-normal) var(--ease-standard);
+          border: none;
+          text-decoration: none;
+          position: relative;
+        }
+        
+        .btn--primary {
+          background: var(--color-primary);
+          color: var(--color-btn-primary-text);
+        }
+        
+        .btn--primary:hover {
+          background: var(--color-primary-hover);
+        }
+        
+        .btn--secondary {
+          background: var(--color-secondary);
+          color: var(--color-text);
+        }
+        
+        .btn--secondary:hover {
+          background: var(--color-secondary-hover);
+        }
+        
+        .btn--sm {
+          padding: var(--space-4) var(--space-12);
+          font-size: var(--font-size-sm);
+          border-radius: var(--radius-sm);
+        }
+        
+        .form-control {
+          display: block;
+          width: 100%;
+          padding: var(--space-8) var(--space-12);
+          font-size: var(--font-size-md);
+          line-height: 1.5;
+          color: var(--color-text);
+          background-color: var(--color-surface);
+          border: 1px solid var(--color-border);
+          border-radius: var(--radius-base);
+          transition: border-color var(--duration-fast) var(--ease-standard);
+        }
+        
+        .form-control:focus {
+          border-color: var(--color-primary);
+          outline: var(--focus-outline);
+        }
+        
+        select.form-control {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          background-image: var(--select-caret-light);
+          background-repeat: no-repeat;
+          background-position: right var(--space-12) center;
+          background-size: 16px;
+          padding-right: var(--space-32);
+        }
+        
+        .form-label {
+          display: block;
+          margin-bottom: var(--space-8);
+          font-weight: var(--font-weight-medium);
+          font-size: var(--font-size-sm);
+        }
+        
+        .card {
+          background-color: var(--color-surface);
+          border-radius: var(--radius-lg);
+          border: 1px solid var(--color-card-border);
+          box-shadow: var(--shadow-sm);
+          overflow: hidden;
+        }
+        
+        .card__body {
+          padding: var(--space-16);
+        }
+
+        /* App specific styles */
+        .app {
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+        }
+        
+        .navbar {
+          background-color: var(--color-surface);
+          border-bottom: 1px solid var(--color-border);
+          padding: 0;
+          box-shadow: var(--shadow-sm);
+        }
+        
+        .navbar__container {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: var(--space-12) var(--space-24);
+          max-width: 1280px;
+          margin: 0 auto;
+          width: 100%;
+        }
+        
+        .navbar__brand {
+          font-size: var(--font-size-xl);
+          font-weight: var(--font-weight-bold);
+          color: var(--color-primary);
+          text-decoration: none;
+        }
+        
+        .navbar__nav {
+          display: flex;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          gap: var(--space-4);
+        }
+        
+        .navbar__link {
+          display: flex;
+          align-items: center;
+          padding: var(--space-8) var(--space-16);
+          color: var(--color-text-secondary);
+          text-decoration: none;
+          border-radius: var(--radius-base);
+          transition: all var(--duration-fast) var(--ease-standard);
+          font-size: var(--font-size-sm);
+          font-weight: var(--font-weight-medium);
+        }
+        
+        .navbar__link:hover {
+          background-color: var(--color-secondary);
+          color: var(--color-text);
+        }
+        
+        .navbar__link--active {
+          background-color: var(--color-primary);
+          color: var(--color-btn-primary-text);
+        }
+        
+        .main {
+          flex: 1;
+          padding: var(--space-24);
+        }
+        
+        .container {
+          max-width: 1280px;
+          margin: 0 auto;
+          width: 100%;
+        }
+        
+        .view {
+          display: none;
+        }
+        
+        .view--active {
+          display: block;
+        }
+        
+        .dashboard-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: var(--space-24);
+          margin-bottom: var(--space-32);
+        }
+        
+        .main-balance-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: var(--space-24);
+          margin-bottom: var(--space-32);
+        }
+        
+        .summary-card {
+          text-align: center;
+        }
+        
+        .summary-card__title {
+          font-size: var(--font-size-sm);
+          color: var(--color-text-secondary);
+          margin-bottom: var(--space-8);
+        }
+        
+        .summary-card__value {
+          font-size: var(--font-size-3xl);
+          font-weight: var(--font-weight-bold);
+          margin-bottom: var(--space-4);
+        }
+        
+        .summary-card__value--positive {
+          color: var(--color-success);
+        }
+        
+        .summary-card__value--negative {
+          color: var(--color-error);
+        }
+        
+        .quick-actions {
+          display: flex;
+          gap: var(--space-12);
+          margin-bottom: var(--space-32);
+          flex-wrap: wrap;
+        }
+        
+        .charts-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: var(--space-24);
+          margin-bottom: var(--space-32);
+        }
+        
+        .chart-container {
+          height: 300px;
+          position: relative;
+        }
+        
+        .table-container {
+          background-color: var(--color-surface);
+          border-radius: var(--radius-lg);
+          border: 1px solid var(--color-card-border);
+          overflow: hidden;
+        }
+        
+        .table {
+          width: 100%;
+          border-collapse: collapse;
+        }
+        
+        .table th,
+        .table td {
+          padding: var(--space-12);
+          text-align: left;
+          border-bottom: 1px solid var(--color-card-border-inner);
+        }
+        
+        .table th {
+          background-color: var(--color-bg-1);
+          font-weight: var(--font-weight-semibold);
+          font-size: var(--font-size-sm);
+          color: var(--color-text);
+          cursor: pointer;
+          user-select: none;
+        }
+        
+        .table th:hover {
+          background-color: var(--color-bg-2);
+        }
+        
+        .table tbody tr:hover {
+          background-color: var(--color-bg-1);
+        }
+        
+        .table-actions {
+          display: flex;
+          gap: var(--space-8);
+        }
+        
+        .modal {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+          z-index: 1000;
+          align-items: center;
+          justify-content: center;
+        }
+        
+        .modal--active {
+          display: flex;
+        }
+        
+        .modal__content {
+          background-color: var(--color-surface);
+          border-radius: var(--radius-lg);
+          padding: var(--space-24);
+          max-width: 500px;
+          width: 90%;
+          max-height: 80vh;
+          overflow-y: auto;
+        }
+        
+        .modal__header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: var(--space-24);
+        }
+        
+        .modal__title {
+          font-size: var(--font-size-xl);
+          margin: 0;
+        }
+        
+        .close-btn {
+          background: none;
+          border: none;
+          font-size: var(--font-size-xl);
+          cursor: pointer;
+          color: var(--color-text-secondary);
+          padding: var(--space-4);
+          line-height: 1;
+        }
+        
+        .form-row {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: var(--space-16);
+          margin-bottom: var(--space-16);
+        }
+        
+        .form-group {
+          margin-bottom: var(--space-16);
+        }
+        
+        .warning-banner {
+          background-color: var(--color-bg-6);
+          border: 1px solid var(--color-warning);
+          border-radius: var(--radius-base);
+          padding: var(--space-16);
+          margin-bottom: var(--space-24);
+          color: var(--color-text);
+        }
+        
+        .warning-banner__title {
+          font-weight: var(--font-weight-bold);
+          color: var(--color-warning);
+          margin-bottom: var(--space-8);
+        }
+        
+        .toast {
+          position: fixed;
+          top: var(--space-24);
+          right: var(--space-24);
+          background-color: var(--color-surface);
+          border-radius: var(--radius-base);
+          padding: var(--space-16);
+          box-shadow: var(--shadow-lg);
+          z-index: 1100;
+          transform: translateX(100%);
+          transition: transform var(--duration-normal) var(--ease-standard);
+        }
+        
+        .toast--show {
+          transform: translateX(0);
+        }
+        
+        .toast--success {
+          border-left: 4px solid var(--color-success);
+        }
+        
+        .toast--error {
+          border-left: 4px solid var(--color-error);
+        }
+        
+        .amount--positive {
+          color: var(--color-success);
+        }
+        
+        .amount--negative {
+          color: var(--color-error);
+        }
+        
+        .editable-cell {
+          cursor: pointer;
+        }
+        
+        .editable-cell:hover {
+          background-color: var(--color-bg-2);
+        }
+        
+        .editable-cell--editing {
+          padding: 0;
+        }
+        
+        .editable-cell--editing input,
+        .editable-cell--editing select {
+          width: 100%;
+          border: none;
+          padding: var(--space-12);
+          background: transparent;
+          font-size: inherit;
+          color: inherit;
+        }
+        
+        .editable-cell--editing input:focus,
+        .editable-cell--editing select:focus {
+          outline: 2px solid var(--color-primary);
+        }
+        
+        /* Client-specific styles */
+        .client-card {
+          transition: all var(--duration-fast) var(--ease-standard);
+        }
+        
+        .client-card:hover {
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-lg);
+        }
+        
+        @media (max-width: 768px) {
+          .navbar__nav {
+            display: none;
+          }
+          
+          .charts-grid {
+            grid-template-columns: 1fr;
+          }
+          
+          .form-row {
+            grid-template-columns: 1fr;
+          }
+          
+          .quick-actions {
+            flex-direction: column;
+          }
+          
+          .table-container {
+            overflow-x: auto;
+          }
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="app">
+        <!-- Warning Banner -->
+        <div class="warning-banner">
+            <div class="warning-banner__title">⚠️ IMPORTANTE</div>
+            <div>I dati sono memorizzati solo durante questa sessione. Usa "Esporta Dati" nelle Impostazioni per salvare regolarmente i tuoi dati. <strong>Nota:</strong> Questa applicazione non è collegata a Google Sheets - i clienti e i dati devono essere inseriti manualmente.</div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="navbar__container">
+                <a href="#" class="navbar__brand">WiB - Wise in Blue</a>
+                <ul class="navbar__nav">
+                    <li><a href="#dashboard" class="navbar__link navbar__link--active" data-view="dashboard">Dashboard</a></li>
+                    <li><a href="#spese" class="navbar__link" data-view="spese">Spese</a></li>
+                    <li><a href="#entrate" class="navbar__link" data-view="entrate">Entrate</a></li>
+                    <li><a href="#bonifici" class="navbar__link" data-view="bonifici">Bonifici</a></li>
+                    <li><a href="#clienti" class="navbar__link" data-view="clienti">Clienti</a></li>
+                    <li><a href="#impostazioni" class="navbar__link" data-view="impostazioni">Impostazioni</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main">
+            <div class="container">
+                <!-- Dashboard View -->
+                <div id="dashboard-view" class="view view--active">
+                    <!-- Hero Section - Totale Wise in Blue -->
+                    <div class="card" style="background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover)); color: var(--color-btn-primary-text); margin-bottom: var(--space-32); text-align: center;">
+                        <div class="card__body" style="padding: var(--space-32);">
+                            <h1 style="font-size: var(--font-size-4xl); margin-bottom: var(--space-16); color: var(--color-btn-primary-text);">WISE IN BLUE</h1>
+                            <h2 style="font-size: var(--font-size-2xl); margin-bottom: var(--space-12); color: var(--color-btn-primary-text);">TOTALE GENERALE</h2>
+                            <div id="wib-total-balance" style="font-size: 3rem; font-weight: var(--font-weight-bold); color: var(--color-btn-primary-text);">€ 0,00</div>
+                        </div>
+                    </div>
+                    
+                    <!-- WiB Overall Balance Cards -->
+                    <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr 1fr; margin-bottom: var(--space-32);">
+                        <div class="card summary-card">
+                            <div class="card__body">
+                                <div class="summary-card__title">Totale Sonia</div>
+                                <div id="saldo-sonia" class="summary-card__value">€ 0,00</div>
+                            </div>
+                        </div>
+                        <div class="card summary-card">
+                            <div class="card__body">
+                                <div class="summary-card__title">Totale Stefano</div>
+                                <div id="saldo-stefano" class="summary-card__value">€ 0,00</div>
+                            </div>
+                        </div>
+                        <div class="card summary-card">
+                            <div class="card__body">
+                                <div class="summary-card__title">Situazione Generale</div>
+                                <div id="situazione" class="summary-card__value" style="font-size: var(--font-size-lg); font-weight: var(--font-weight-bold); color: var(--color-primary);">I conti sono in pari</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Summary Statistics -->
+                    <div class="dashboard-grid">
+                        <div class="card summary-card">
+                            <div class="card__body">
+                                <div class="summary-card__title">Totale Spese</div>
+                                <div id="total-expenses-all-card" class="summary-card__value">€ 0,00</div>
+                            </div>
+                        </div>
+                        <div class="card summary-card">
+                            <div class="card__body">
+                                <div class="summary-card__title">Totale Entrate</div>
+                                <div id="total-income-all-card" class="summary-card__value">€ 0,00</div>
+                            </div>
+                        </div>
+                        <div class="card summary-card">
+                            <div class="card__body">
+                                <div class="summary-card__title">Numero Clienti Attivi</div>
+                                <div id="active-clients-count" class="summary-card__value">0</div>
+                            </div>
+                        </div>
+                        <div class="card summary-card">
+                            <div class="card__body">
+                                <div class="summary-card__title">Ultimo Aggiornamento</div>
+                                <div id="last-update" class="summary-card__value" style="font-size: var(--font-size-sm);">Ora</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Riepilogo per Cliente -->
+                    <div class="card" style="margin-bottom: var(--space-32);">
+                        <div class="card__body">
+                            <h3 style="margin-bottom: var(--space-24);">Riepilogo per Cliente</h3>
+                            <div class="table-container">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Nome Cliente</th>
+                                            <th>Saldo Cliente</th>
+                                            <th>Spese Totali</th>
+                                            <th>Entrate Totali</th>
+                                            <th>Situazione</th>
+                                            <th>Azioni</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="client-summary-table">
+                                        <!-- Populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quick-actions">
+                        <button class="btn btn--primary" onclick="showModal('expense-modal')">+ Nuova Spesa</button>
+                        <button class="btn btn--primary" onclick="showModal('income-modal')">+ Nuova Entrata</button>
+                        <button class="btn btn--primary" onclick="showModal('transfer-modal')">+ Nuovo Bonifico</button>
+                        <button class="btn btn--primary" onclick="showModal('client-modal')">+ Nuovo Cliente</button>
+                    </div>
+
+                    <div class="charts-grid">
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>Spese per Categoria</h3>
+                                <div class="chart-container">
+                                    <canvas id="expenses-pie-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>Confronto Sonia vs Stefano</h3>
+                                <div class="chart-container">
+                                    <canvas id="comparison-bar-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spese View -->
+                <div id="spese-view" class="view">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-24);">
+                        <h1>Spese</h1>
+                        <button class="btn btn--primary" onclick="showModal('expense-modal')">+ Aggiungi Spesa</button>
+                    </div>
+                    
+                    <div class="dashboard-grid">
+                        <div class="card summary-card">
+                            <div class="card__body">
+                                <div class="summary-card__title">Totale Spese Sonia</div>
+                                <div id="total-expenses-sonia" class="summary-card__value summary-card__value--negative">€ -229,14</div>
+                            </div>
+                        </div>
+                        <div class="card summary-card">
+                            <div class="card__body">
+                                <div class="summary-card__title">Totale Spese Stefano</div>
+                                <div id="total-expenses-stefano" class="summary-card__value">€ 0,00</div>
+                            </div>
+                        </div>
+                        <div class="card summary-card">
+                            <div class="card__body">
+                                <div class="summary-card__title">Totale Spese</div>
+                                <div id="total-expenses-overall" class="summary-card__value summary-card__value--negative">€ -229,14</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th onclick="sortTable('expenses', 'date')">Data</th>
+                                    <th onclick="sortTable('expenses', 'client')">Cliente</th>
+                                    <th onclick="sortTable('expenses', 'description')">Descrizione</th>
+                                    <th onclick="sortTable('expenses', 'sonia')">Sonia</th>
+                                    <th onclick="sortTable('expenses', 'stefano')">Stefano</th>
+                                    <th onclick="sortTable('expenses', 'category')">Categoria</th>
+                                    <th>Azioni</th>
+                                </tr>
+                            </thead>
+                            <tbody id="expenses-table-body">
+                                <!-- Data will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Entrate View -->
+                <div id="entrate-view" class="view">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-24);">
+                        <h1>Entrate</h1>
+                        <button class="btn btn--primary" onclick="showModal('income-modal')">+ Aggiungi Entrata</button>
+                    </div>
+                    
+                    <div class="dashboard-grid">
+                        <div class="card summary-card">
+                            <div class="card__body">
+                                <div class="summary-card__title">Totale Entrate Sonia</div>
+                                <div id="total-income-sonia" class="summary-card__value summary-card__value--positive">€ 0,00</div>
+                            </div>
+                        </div>
+                        <div class="card summary-card">
+                            <div class="card__body">
+                                <div class="summary-card__title">Totale Entrate Stefano</div>
+                                <div id="total-income-stefano" class="summary-card__value summary-card__value--positive">€ 0,00</div>
+                            </div>
+                        </div>
+                        <div class="card summary-card">
+                            <div class="card__body">
+                                <div class="summary-card__title">Totale Entrate</div>
+                                <div id="total-income-overall" class="summary-card__value summary-card__value--positive">€ 0,00</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th onclick="sortTable('income', 'date')">Data</th>
+                                    <th onclick="sortTable('income', 'client')">Cliente</th>
+                                    <th onclick="sortTable('income', 'description')">Descrizione</th>
+                                    <th onclick="sortTable('income', 'sonia')">Sonia</th>
+                                    <th onclick="sortTable('income', 'stefano')">Stefano</th>
+                                    <th onclick="sortTable('income', 'category')">Categoria</th>
+                                    <th>Azioni</th>
+                                </tr>
+                            </thead>
+                            <tbody id="income-table-body">
+                                <!-- Data will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Bonifici View -->
+                <div id="bonifici-view" class="view">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-24);">
+                        <h1>Bonifici</h1>
+                        <button class="btn btn--primary" onclick="showModal('transfer-modal')">+ Aggiungi Bonifico</button>
+                    </div>
+                    
+                    <div class="dashboard-grid">
+                        <div class="card summary-card">
+                            <div class="card__body">
+                                <div class="summary-card__title">Trasferimenti Sonia → Stefano</div>
+                                <div id="transfers-sonia-to-stefano" class="summary-card__value">€ 0,00</div>
+                            </div>
+                        </div>
+                        <div class="card summary-card">
+                            <div class="card__body">
+                                <div class="summary-card__title">Trasferimenti Stefano → Sonia</div>
+                                <div id="transfers-stefano-to-sonia" class="summary-card__value">€ 1.000,00</div>
+                            </div>
+                        </div>
+                        <div class="card summary-card">
+                            <div class="card__body">
+                                <div class="summary-card__title">Trasferimenti Netti</div>
+                                <div id="net-transfers" class="summary-card__value">€ 1.000,00</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th onclick="sortTable('transfers', 'date')">Data</th>
+                                    <th onclick="sortTable('transfers', 'description')">Descrizione</th>
+                                    <th onclick="sortTable('transfers', 'from')">Da</th>
+                                    <th onclick="sortTable('transfers', 'to')">A</th>
+                                    <th onclick="sortTable('transfers', 'amount')">Importo</th>
+                                    <th onclick="sortTable('transfers', 'status')">Stato</th>
+                                    <th>Azioni</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transfers-table-body">
+                                <!-- Data will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Clienti View -->
+                <div id="clienti-view" class="view">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-24);">
+                        <h1>Clienti</h1>
+                        <button class="btn btn--primary" onclick="showModal('client-modal')">+ Aggiungi Cliente</button>
+                    </div>
+                    
+                    <div id="clients-list" class="dashboard-grid">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Client Detail View -->
+                <div id="client-detail-view" class="view">
+                    <div style="display: flex; align-items: center; gap: var(--space-16); margin-bottom: var(--space-24);">
+                        <button class="btn btn--secondary" onclick="showView('clienti'); updateActiveNav('clienti');">← Torna ai Clienti</button>
+                        <div>
+                            <h1 id="client-detail-name">Cliente</h1>
+                            <div id="client-detail-info" style="color: var(--color-text-secondary); font-size: var(--font-size-sm);"></div>
+                        </div>
+                    </div>
+
+                    <!-- Client Balance Cards -->
+                    <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr 1fr; margin-bottom: var(--space-32);">
+                        <div class="card summary-card">
+                            <div class="card__body">
+                                <div class="summary-card__title">Saldo Cliente</div>
+                                <div id="client-total-balance" class="summary-card__value">€ 0,00</div>
+                            </div>
+                        </div>
+                        <div class="card summary-card">
+                            <div class="card__body">
+                                <div class="summary-card__title">Totale Sonia</div>
+                                <div id="client-sonia-balance" class="summary-card__value">€ 0,00</div>
+                            </div>
+                        </div>
+                        <div class="card summary-card">
+                            <div class="card__body">
+                                <div class="summary-card__title">Totale Stefano</div>
+                                <div id="client-stefano-balance" class="summary-card__value">€ 0,00</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Client Situation Card -->
+                    <div class="card" style="margin-bottom: var(--space-32); text-align: center; background: var(--color-bg-1);">
+                        <div class="card__body">
+                            <h3>Situazione per questo Cliente</h3>
+                            <div id="client-situation" style="font-size: var(--font-size-xl); font-weight: var(--font-weight-bold); color: var(--color-primary); margin-top: var(--space-16);">In pari</div>
+                        </div>
+                    </div>
+
+                    <!-- Client Stats -->
+                    <div class="dashboard-grid" style="margin-bottom: var(--space-32);">
+                        <div class="card summary-card">
+                            <div class="card__body">
+                                <div class="summary-card__title">Spese Sonia</div>
+                                <div id="client-expenses-sonia" class="summary-card__value">€ 0,00</div>
+                            </div>
+                        </div>
+                        <div class="card summary-card">
+                            <div class="card__body">
+                                <div class="summary-card__title">Spese Stefano</div>
+                                <div id="client-expenses-stefano" class="summary-card__value">€ 0,00</div>
+                            </div>
+                        </div>
+                        <div class="card summary-card">
+                            <div class="card__body">
+                                <div class="summary-card__title">Entrate Sonia</div>
+                                <div id="client-income-sonia" class="summary-card__value">€ 0,00</div>
+                            </div>
+                        </div>
+                        <div class="card summary-card">
+                            <div class="card__body">
+                                <div class="summary-card__title">Entrate Stefano</div>
+                                <div id="client-income-stefano" class="summary-card__value">€ 0,00</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Client Quick Actions -->
+                    <div class="quick-actions" style="margin-bottom: var(--space-32);">
+                        <button class="btn btn--primary" onclick="showModal('expense-modal'); preSelectClient(currentClientId);">+ Aggiungi Spesa per questo Cliente</button>
+                        <button class="btn btn--primary" onclick="showModal('income-modal'); preSelectClient(currentClientId);">+ Aggiungi Entrata per questo Cliente</button>
+                    </div>
+
+                    <!-- Client Tabs -->
+                    <div style="border-bottom: 1px solid var(--color-border); margin-bottom: var(--space-24);">
+                        <div style="display: flex; gap: var(--space-4);">
+                            <button class="btn btn--secondary client-tab" data-tab="expenses" onclick="showClientTab('expenses')" style="border-radius: var(--radius-base) var(--radius-base) 0 0;">Spese</button>
+                            <button class="btn btn--secondary client-tab" data-tab="income" onclick="showClientTab('income')" style="border-radius: var(--radius-base) var(--radius-base) 0 0;">Entrate</button>
+                            <button class="btn btn--secondary client-tab" data-tab="history" onclick="showClientTab('history')" style="border-radius: var(--radius-base) var(--radius-base) 0 0;">Storico</button>
+                        </div>
+                    </div>
+
+                    <!-- Client Tab Content -->
+                    <div id="client-tab-expenses" class="client-tab-content">
+                        <div class="table-container">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Data</th>
+                                        <th>Descrizione</th>
+                                        <th>Sonia</th>
+                                        <th>Stefano</th>
+                                        <th>Categoria</th>
+                                        <th>Azioni</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="client-expenses-table">
+                                    <!-- Populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div id="client-tab-income" class="client-tab-content" style="display: none;">
+                        <div class="table-container">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Data</th>
+                                        <th>Descrizione</th>
+                                        <th>Sonia</th>
+                                        <th>Stefano</th>
+                                        <th>Categoria</th>
+                                        <th>Azioni</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="client-income-table">
+                                    <!-- Populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div id="client-tab-history" class="client-tab-content" style="display: none;">
+                        <div class="table-container">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Data</th>
+                                        <th>Tipo</th>
+                                        <th>Descrizione</th>
+                                        <th>Sonia</th>
+                                        <th>Stefano</th>
+                                        <th>Saldo Progressivo</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="client-history-table">
+                                    <!-- Populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Impostazioni View -->
+                <div id="impostazioni-view" class="view">
+                    <h1>Impostazioni</h1>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-24);">
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>Gestione Dati</h3>
+                                <div style="display: flex; flex-direction: column; gap: var(--space-12);">
+                                    <button class="btn btn--primary" onclick="exportData()">Esporta Dati (JSON)</button>
+                                    <input type="file" id="import-file" accept=".json" style="display: none;" onchange="importData(this)">
+                                    <button class="btn btn--secondary" onclick="document.getElementById('import-file').click()">Importa Dati (JSON)</button>
+                                    <button class="btn btn--secondary" onclick="exportCSV('expenses')">Esporta Spese (CSV)</button>
+                                    <button class="btn btn--secondary" onclick="exportCSV('income')">Esporta Entrate (CSV)</button>
+                                    <button class="btn btn--secondary" onclick="exportCSV('transfers')">Esporta Bonifici (CSV)</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>Categorie</h3>
+                                <div style="margin-bottom: var(--space-16);">
+                                    <h4>Categorie Spese</h4>
+                                    <div id="expense-categories-list"></div>
+                                </div>
+                                <div>
+                                    <h4>Categorie Entrate</h4>
+                                    <div id="income-categories-list"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Modals -->
+        <!-- Expense Modal -->
+        <div id="expense-modal" class="modal">
+            <div class="modal__content">
+                <div class="modal__header">
+                    <h2 class="modal__title">Aggiungi Spesa</h2>
+                    <button class="close-btn" onclick="hideModal('expense-modal')">&times;</button>
+                </div>
+                <form id="expense-form" onsubmit="addExpense(event)">
+                    <div class="form-group">
+                        <label class="form-label" for="expense-client">Cliente *</label>
+                        <select id="expense-client" class="form-control" required>
+                            <option value="">Seleziona cliente...</option>
+                            <!-- Options populated by JavaScript -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="expense-date">Data</label>
+                        <input type="date" id="expense-date" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="expense-description">Descrizione</label>
+                        <input type="text" id="expense-description" class="form-control" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="expense-sonia">Importo Sonia (€)</label>
+                            <input type="number" id="expense-sonia" class="form-control" step="0.01" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="expense-stefano">Importo Stefano (€)</label>
+                            <input type="number" id="expense-stefano" class="form-control" step="0.01" value="0">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="expense-category">Categoria</label>
+                        <select id="expense-category" class="form-control" required>
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    <div style="display: flex; gap: var(--space-12); justify-content: flex-end;">
+                        <button type="button" class="btn btn--secondary" onclick="hideModal('expense-modal')">Annulla</button>
+                        <button type="submit" class="btn btn--primary">Salva</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Income Modal -->
+        <div id="income-modal" class="modal">
+            <div class="modal__content">
+                <div class="modal__header">
+                    <h2 class="modal__title">Aggiungi Entrata</h2>
+                    <button class="close-btn" onclick="hideModal('income-modal')">&times;</button>
+                </div>
+                <form id="income-form" onsubmit="addIncome(event)">
+                    <div class="form-group">
+                        <label class="form-label" for="income-client">Cliente *</label>
+                        <select id="income-client" class="form-control" required>
+                            <option value="">Seleziona cliente...</option>
+                            <!-- Options populated by JavaScript -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="income-date">Data</label>
+                        <input type="date" id="income-date" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="income-description">Descrizione</label>
+                        <input type="text" id="income-description" class="form-control" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="income-sonia">Importo Sonia (€)</label>
+                            <input type="number" id="income-sonia" class="form-control" step="0.01" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="income-stefano">Importo Stefano (€)</label>
+                            <input type="number" id="income-stefano" class="form-control" step="0.01" value="0">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="income-category">Categoria</label>
+                        <select id="income-category" class="form-control" required>
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    <div style="display: flex; gap: var(--space-12); justify-content: flex-end;">
+                        <button type="button" class="btn btn--secondary" onclick="hideModal('income-modal')">Annulla</button>
+                        <button type="submit" class="btn btn--primary">Salva</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Transfer Modal -->
+        <div id="transfer-modal" class="modal">
+            <div class="modal__content">
+                <div class="modal__header">
+                    <h2 class="modal__title">Aggiungi Bonifico</h2>
+                    <button class="close-btn" onclick="hideModal('transfer-modal')">&times;</button>
+                </div>
+                <form id="transfer-form" onsubmit="addTransfer(event)">
+                    <div class="form-group">
+                        <label class="form-label" for="transfer-date">Data</label>
+                        <input type="date" id="transfer-date" class="form-control" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="transfer-from">Da</label>
+                            <select id="transfer-from" class="form-control" required>
+                                <option value="Sonia">Sonia</option>
+                                <option value="Stefano">Stefano</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="transfer-to">A</label>
+                            <select id="transfer-to" class="form-control" required>
+                                <option value="Sonia">Sonia</option>
+                                <option value="Stefano">Stefano</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="transfer-amount">Importo (€)</label>
+                        <input type="number" id="transfer-amount" class="form-control" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="transfer-description">Descrizione</label>
+                        <input type="text" id="transfer-description" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="transfer-status">Stato</label>
+                        <select id="transfer-status" class="form-control" required>
+                            <option value="Completato">Completato</option>
+                            <option value="In Attesa">In Attesa</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; gap: var(--space-12); justify-content: flex-end;">
+                        <button type="button" class="btn btn--secondary" onclick="hideModal('transfer-modal')">Annulla</button>
+                        <button type="submit" class="btn btn--primary">Salva</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Client Modal -->
+        <div id="client-modal" class="modal">
+            <div class="modal__content">
+                <div class="modal__header">
+                    <h2 class="modal__title">Aggiungi Cliente</h2>
+                    <button class="close-btn" onclick="hideModal('client-modal')">&times;</button>
+                </div>
+                <form id="client-form" onsubmit="addClient(event)">
+                    <div class="form-group">
+                        <label class="form-label" for="client-name">Nome Cliente *</label>
+                        <input type="text" id="client-name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="client-email">Email</label>
+                        <input type="email" id="client-email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="client-phone">Telefono</label>
+                        <input type="tel" id="client-phone" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="client-address">Indirizzo Proprietà</label>
+                        <input type="text" id="client-address" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="client-notes">Note</label>
+                        <textarea id="client-notes" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div style="display: flex; gap: var(--space-12); justify-content: flex-end;">
+                        <button type="button" class="btn btn--secondary" onclick="hideModal('client-modal')">Annulla</button>
+                        <button type="submit" class="btn btn--primary">Salva</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div id="toast" class="toast"></div>
+    </div>
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
